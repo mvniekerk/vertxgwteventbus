@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'gwt'
+
+repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+}
+
+dependencies {
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+gwt {
+	gwtVersion='2.8.0'
+	modules 'za.co.dvt.jhb.sockjsgwtclient.SockJsGwtClient'
+    logLevel = 'INFO'
+
+    minHeapSize = "512M";
+    maxHeapSize = "1024M";
+
+}
+
+task jettyDraftWar(type: JettyRunWar) {
+    dependsOn draftWar
+    dependsOn.remove('war')
+    webApp=draftWar.archivePath
+}

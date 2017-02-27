@@ -1,0 +1,19 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    compile 'io.vertx:vertx-core:3.3.3'
+    compile 'io.vertx:vertx-web:3.3.3'
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    testCompile 'junit:junit:4.12'
+}
+
+task run(type: JavaExec) {
+    main = "za.co.dvt.jhb.vertxsockjs.VertxSockJsServer"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
